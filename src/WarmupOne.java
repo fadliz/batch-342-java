@@ -44,5 +44,29 @@ public class WarmupOne {
         return str.replaceFirst(str.charAt(n)+"", "");
       }
       
+      public String frontBack(String str) {
+        char[] chars = str.toCharArray();
+        if (!str.isEmpty()) {
+            char temp = chars[0];
+            chars[0] = chars[str.length()-1];
+            chars[str.length()-1] = temp;
+        }
+        return new String(chars);
+      }
+      
+      public String front3(String str) {
+        if (str.isEmpty()) return "";
+        String sub = str.length() >= 3 ? str.substring(0,3) : str.substring(0,str.length());
+        return sub+sub+sub;
+      }
+      
+      public String backAround(String str) {
+        return str.isEmpty() ? "" : str.charAt(str.length()-1) + str + str.charAt(str.length()-1);
+      }
+      
+      public boolean or35(int n) {
+        return (n % 3 == 0 || n % 5 == 0) ? true : false;
+      }
+      
       
 }
