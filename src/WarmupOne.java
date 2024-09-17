@@ -68,5 +68,18 @@ public class WarmupOne {
         return (n % 3 == 0 || n % 5 == 0) ? true : false;
       }
       
+      public String front22(String str) {
+        if (str.isEmpty()) return "";
+        String sub = str.length() >= 2 ? str.substring(0,2) : str.substring(0,str.length());
+        return sub+str+sub;
+      }
+
+      public boolean startHi(String str) {
+        return str.startsWith("hi");
+      }
+      
+      public boolean icyHot(int temp1, int temp2) {
+        return (temp1 < 0 && temp2 > 100) || (temp2 < 0 && temp1 > 100);
+      }
       
 }
