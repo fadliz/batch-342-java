@@ -1,5 +1,11 @@
+
+
+
 public class App {
     public static void main(String[] args) throws Exception {
-        System.out.println("Hello, World!");
+        WarmupOne fungsi = new WarmupOne();
+        System.out.println("");
+        // System.out.println(fungsi.frontBack("aaaw"));
     }
+
 }
