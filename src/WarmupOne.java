@@ -97,5 +97,82 @@ public class WarmupOne {
   public boolean loneTeen(int a, int b) {
     return (a <= 19 && a >= 13) ^ (b <= 19 && b >= 13);
   }
+
+  public String delDel(String str) {
+    return str.contains("del") && str.length() >= 4 && str.substring(1, 4).equals("del")
+        ? str.substring(0, 1) + str.substring(4)
+        : str;
+  }
+
+  public boolean mixStart(String str) {
+    return str.length() >= 3 && str.substring(1, 3).equals("ix");
+  }
+
+  public String startOz(String str) {
+    return (str.length() >= 1 && str.substring(0, 1).equals("o") ? str.substring(0, 1) : "")
+        + (str.length() >= 2 && str.substring(1, 2).equals("z") ? str.substring(1, 2) : "");
+  }
+
+  public int intMax(int a, int b, int c) {
+    return Math.max(Math.max(a, b), c);
+  }
+
+  public int close10(int a, int b) {
+    int aDiff = Math.abs(a - 10);
+    int bDiff = Math.abs(b - 10);
+
+    if (aDiff < bDiff) {
+      return a;
+    }
+    if (bDiff < aDiff) {
+      return b;
+    }
+    return 0;
+  }
+
+  public boolean in3050(int a, int b) {
+    return (a >= 30 && a <= 40) && (b >= 30 && b <= 40) 
+    || (a >= 40 && a <= 50) && (b >= 40 && b <= 50);
+  }
   
+  public int max1020(int a, int b) {
+    if (a >= 10 && a <= 20) {
+      if (b >= 10 && b <= 20) {
+        return Math.max(a, b);
+      } 
+      return a;
+    }
+    if (b >= 10 && b <= 20) {
+      return b;
+    }
+    return 0;
+  }
+  
+  public boolean stringE(String str) {
+    int count = 0;
+    for (char chr : str.toCharArray()) {
+      if (chr == 'e') {
+          count++;
+      }
+    }
+    return count <= 3 && count >= 1;
+  }
+  
+  public boolean lastDigit(int a, int b) {
+    return(a % 10 == b % 10);
+  }
+  
+  public String endUp(String str) {
+    return (str.length() >= 3) ? str.substring(0, str.length() - 3) + str.substring(str.length() - 3, str.length()).toUpperCase() : str.toUpperCase();
+  }
+
+  public String everyNth(String str, int n) {
+    StringBuilder result = new StringBuilder();
+    for (int i = 0; i < str.length(); i += n) {
+      result.append(str.charAt(i));
+    }
+    return result.toString();
+  }
+  
+  // Warmup-1 Done
 }

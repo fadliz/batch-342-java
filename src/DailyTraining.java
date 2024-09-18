@@ -45,8 +45,39 @@ public class DailyTraining {
     }
 
     public String minAndMax(int a, int b, int c, int d) {
-        int min = Math.min(Math.min(a, b), Math.min(c, d));
-        int max = Math.max(Math.max(a, b), Math.max(c, d));
+        // int min = Math.min(Math.min(a, b), Math.min(c, d));
+        // int max = Math.max(Math.max(a, b), Math.max(c, d));
+        int min = (int) (Double.POSITIVE_INFINITY);
+        int max = (int) (Double.NEGATIVE_INFINITY);
+        if (a < min) {
+            min = a;
+        } else if (a > max) {
+            max = a;
+        }
+        if (b < min) {
+            min = b;
+        } else if (b > max) {
+            max = b;
+        }
+        if (c < min) {
+            min = c;
+        } else if (c > max) {
+            max = c;
+        }
+        if (d < min) {
+            min = d;
+        } else if (d > max) {
+            max = d;
+        }
         return "min : " + min + "\nmax : " + max;
+    }
+
+    public boolean betweenAB(int a, int b) {
+        if (a >= 30 && a <= 50) {
+            if (b >= 30 && b <= 50) {
+                return true;
+            }
+        }
+        return false;
     }
 }
