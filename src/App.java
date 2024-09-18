@@ -6,9 +6,10 @@ public class App {
         // WarmupOne fungsi = new WarmupOne();
         DailyTraining dayOne = new DailyTraining();
         System.out.println("");
+        System.out.println("");
         // System.out.println(fungsi.startHi("cat"));
-        System.out.println(dayOne.factorial());
-        // dayOne.fiboN();
+        // System.out.println(dayOne.factorial());
+        dayOne.matrixPrint();
     }
 
 }
