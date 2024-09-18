@@ -5,7 +5,7 @@ public class DailyTraining {
             Generation = "G.I. Generation";
         }
         else if (year >= 1928 && year <= 1945) {
-            Generation = "B.C. Generation";
+            Generation = "Silent Generation";
         }
         else if (year >= 1946 && year <= 1964) {
             Generation = "Millennial Generation";
@@ -49,30 +49,14 @@ public class DailyTraining {
         // int max = Math.max(Math.max(a, b), Math.max(c, d));
         int min = (int) (Double.POSITIVE_INFINITY);
         int max = (int) (Double.NEGATIVE_INFINITY);
-        if (a < min) {
-            min = a;
-        } 
-        if (a > max) {
-            max = a;
-        }
-        if (b < min) {
-            min = b;
-        } 
-        if (b > max) {
-            max = b;
-        }
-        if (c < min) {
-            min = c;
-        } 
-        if (c > max) {
-            max = c;
-        }
-        if (d < min) {
-            min = d;
-        } 
-        if (d > max) {
-            max = d;
-        }
+        if (a < min) min = a;
+        if (a > max) max = a;
+        if (b < min) min = b;
+        if (b > max) max = b;
+        if (c < min) min = c;
+        if (c > max) max = c;
+        if (d < min) min = d;
+        if (d > max) max = d;
         return "min : " + min + "\nmax : " + max;
     }
 
