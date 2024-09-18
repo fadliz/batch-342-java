@@ -7,7 +7,8 @@ public class App {
         DailyTraining dayOne = new DailyTraining();
         System.out.println("");
         // System.out.println(fungsi.startHi("cat"));
-        System.out.println(dayOne.minAndMax(-5, -7, -8, -9));
+        System.out.println(dayOne.factorial());
+        // dayOne.fiboN();
     }
 
 }

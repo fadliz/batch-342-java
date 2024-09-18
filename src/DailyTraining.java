@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class DailyTraining {
     public String generational(int year) {
         String Generation = "";
@@ -64,5 +66,37 @@ public class DailyTraining {
             }
         }
         return false;
+    }
+
+    // Perulangan
+
+    //no.5
+    public void fiboN() {
+        int a = 0; int b = 1; 
+        try (Scanner scn = new Scanner(System.in)) {
+            System.out.print("Masukkan n: ");
+            int n = scn.nextInt();
+            scn.close();
+            for (int i = 0; i < n; i++) {
+                System.out.print((b) + " ");
+                int temp = a;
+                a = b;
+                b = temp + b;
+            }
+        }
+    }
+
+    //no.6
+    public long factorial() {
+        try (Scanner scn = new Scanner(System.in)) {
+            System.out.print("Masukkan bilangan: ");
+            int a = scn.nextInt();
+            scn.close();
+            long sum = 1;
+            for (int i = a; i > 0; i--) {
+                sum *= i;
+            }
+            return sum;
+        }
     }
 }
