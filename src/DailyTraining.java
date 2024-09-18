@@ -51,22 +51,26 @@ public class DailyTraining {
         int max = (int) (Double.NEGATIVE_INFINITY);
         if (a < min) {
             min = a;
-        } else if (a > max) {
+        } 
+        if (a > max) {
             max = a;
         }
         if (b < min) {
             min = b;
-        } else if (b > max) {
+        } 
+        if (b > max) {
             max = b;
         }
         if (c < min) {
             min = c;
-        } else if (c > max) {
+        } 
+        if (c > max) {
             max = c;
         }
         if (d < min) {
             min = d;
-        } else if (d > max) {
+        } 
+        if (d > max) {
             max = d;
         }
         return "min : " + min + "\nmax : " + max;
