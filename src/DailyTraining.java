@@ -8,7 +8,7 @@ public class DailyTraining {
             Generation = "Silent Generation";
         }
         else if (year >= 1946 && year <= 1964) {
-            Generation = "Millennial Generation";
+            Generation = "Baby Boomers Generation";
         }
         else if (year >= 1965 && year <= 1980) {
             Generation = "Gen X";
@@ -17,13 +17,10 @@ public class DailyTraining {
             Generation = "Gen Y";
         }
         else if (year >= 1997 && year <= 2010) {
-            Generation = "Boomer Generation";
+            Generation = "Gen Z";
         }
         else if (year >= 2011 && year <= 2025) {
-            Generation = "Millennial Generation";
-        }
-        else if (year >= 2026 && year <= 2040) {
-            Generation = "Gen Z";
+            Generation = "Millennial Alpha";
         }
         return Generation;
     }
