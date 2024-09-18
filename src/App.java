@@ -7,7 +7,7 @@ public class App {
         DailyTraining dayOne = new DailyTraining();
         System.out.println("");
         // System.out.println(fungsi.startHi("cat"));
-        System.out.println(dayOne.minAndMax(2, 1, 233, -2321));
+        System.out.println(dayOne.bmi(1.59, 74));
     }
 
 }

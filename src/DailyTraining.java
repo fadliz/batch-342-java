@@ -28,8 +28,8 @@ public class DailyTraining {
         return Generation;
     }
 
-    public String bmi(int height, int weight) {
-        double bmi = (double) weight / (height * height) * 703;
+    public String bmi(double height, int weight) {
+        double bmi = (double) weight / (double) (height * height) ;
         if (bmi < 18.5) {
             return "Underweight";
         }
