@@ -6,40 +6,31 @@ public class DailyTraining {
         String Generation = "";
         if (year >= 1901 && year <= 1927) {
             Generation = "G.I. Generation";
-        }
-        else if (year >= 1928 && year <= 1945) {
+        } else if (year >= 1928 && year <= 1945) {
             Generation = "Silent Generation";
-        }
-        else if (year >= 1946 && year <= 1964) {
+        } else if (year >= 1946 && year <= 1964) {
             Generation = "Baby Boomers Generation";
-        }
-        else if (year >= 1965 && year <= 1980) {
+        } else if (year >= 1965 && year <= 1980) {
             Generation = "Gen X";
-        }
-        else if (year >= 1981 && year <= 1996) {
+        } else if (year >= 1981 && year <= 1996) {
             Generation = "Gen Y";
-        }
-        else if (year >= 1997 && year <= 2010) {
+        } else if (year >= 1997 && year <= 2010) {
             Generation = "Gen Z";
-        }
-        else if (year >= 2011 && year <= 2025) {
+        } else if (year >= 2011 && year <= 2025) {
             Generation = "Millennial Alpha";
         }
         return Generation;
     }
 
     public String bmi(double height, int weight) {
-        double bmi = (double) weight / (double) (height * height) ;
+        double bmi = (double) weight / (double) (height * height);
         if (bmi < 18.5) {
             return "Underweight";
-        }
-        else if (bmi >= 18.5 && bmi < 25) {
+        } else if (bmi >= 18.5 && bmi < 25) {
             return "Normal weight";
-        }
-        else if (bmi >= 25 && bmi < 30) {
+        } else if (bmi >= 25 && bmi < 30) {
             return "Overweight";
-        }
-        else {
+        } else {
             return "Obese";
         }
     }
@@ -49,14 +40,22 @@ public class DailyTraining {
         // int max = Math.max(Math.max(a, b), Math.max(c, d));
         int min = (int) (Double.POSITIVE_INFINITY);
         int max = (int) (Double.NEGATIVE_INFINITY);
-        if (a < min) min = a;
-        if (a > max) max = a;
-        if (b < min) min = b;
-        if (b > max) max = b;
-        if (c < min) min = c;
-        if (c > max) max = c;
-        if (d < min) min = d;
-        if (d > max) max = d;
+        if (a < min)
+            min = a;
+        if (a > max)
+            max = a;
+        if (b < min)
+            min = b;
+        if (b > max)
+            max = b;
+        if (c < min)
+            min = c;
+        if (c > max)
+            max = c;
+        if (d < min)
+            min = d;
+        if (d > max)
+            max = d;
         return "min : " + min + "\nmax : " + max;
     }
 
@@ -71,9 +70,10 @@ public class DailyTraining {
 
     // Perulangan
 
-    //no.5
+    // no.5
     public void fiboN() {
-        int a = 0; int b = 1; 
+        int a = 0;
+        int b = 1;
         try (Scanner scn = new Scanner(System.in)) {
             System.out.print("Masukkan n: ");
             int n = scn.nextInt();
@@ -87,7 +87,7 @@ public class DailyTraining {
         }
     }
 
-    //no.6
+    // no.6
     public long factorial() {
         try (Scanner scn = new Scanner(System.in)) {
             System.out.print("Masukkan bilangan: ");
@@ -116,7 +116,7 @@ public class DailyTraining {
                     arrMatrix[i][j] = rand.nextInt(1000);
                 }
             }
-            
+
             System.out.println("||==============".repeat(column) + "||");
             for (int i = 0; i < row; i++) {
                 System.out.print("||\t");
@@ -154,5 +154,25 @@ public class DailyTraining {
             case "minggu" -> 7;
             default -> -1;
         };
+    }
+
+    public void twoDaysAroundNow(String day) {
+        int dayNumber = DayNumber(day);
+        if (dayNumber == -1)
+            System.out.println("Hari yang anda masukkan salah!");
+        else {
+            String dMinusOne = dayNumber - 1 < 1 ? dayName(dayNumber + 7 - 1) : dayName(dayNumber-1);
+            String dMinusTwo = dayNumber - 2 < 1 ? dayName(dayNumber + 7 - 2) : dayName(dayNumber-2);
+            String dDay = dayName(dayNumber);
+            String dPlusOne = dayNumber + 1 > 7 ? dayName(dayNumber - 7 + 1) : dayName(dayNumber+1);
+            String dPlusTwo = dayNumber + 2 > 7 ? dayName(dayNumber - 7 + 2) : dayName(dayNumber+2);
+            System.out.println(
+                "Kemarin lusa adalah hari\t" + dMinusTwo +
+                "\nKemarin adalah hari\t\t" + dMinusOne +
+                "\nHari ini adalah hari\t\t" + dDay +
+                "\nBesok adalah hari\t\t" + dPlusOne +
+                "\nBesok lusa adalah hari\t\t" + dPlusTwo
+            );
+        }
     }
 }

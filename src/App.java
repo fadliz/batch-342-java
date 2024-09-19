@@ -11,13 +11,15 @@ public class App {
             // System.out.println(training.factorial());
             // training.matrixPrint();
             
-            System.out.print("Masukkan angka: ");
-            int dayNum = Integer.parseInt(scn.nextLine());
-            System.out.println(training.dayName(dayNum));
+            // System.out.print("Masukkan angka: ");
+            // int dayNum = Integer.parseInt(scn.nextLine());
+            // System.out.println(training.dayName(dayNum));
 
             System.out.print("Masukkan Hari: ");
             String dayName = scn.nextLine();
-            System.out.println(training.DayNumber(dayName));
+            // System.out.println(training.DayNumber(dayName));
+            System.out.println("");
+            training.twoDaysAroundNow(dayName);
             
             scn.close();
         }
