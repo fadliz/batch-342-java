@@ -1,3 +1,4 @@
+import java.time.Year;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -173,6 +174,22 @@ public class DailyTraining {
                 "\nBesok adalah hari\t\t" + dPlusOne +
                 "\nBesok lusa adalah hari\t\t" + dPlusTwo
             );
+        }
+    }
+    
+    public void leapYear(int year) {
+        System.out.println("Leap Years after " + year + " :");
+        int i = year;
+        for (; i < Year.now().getValue(); i++) {
+            if (i % 4 != 0 || (i % 100 == 0 && i % 400 != 0)) continue;
+            System.out.print(i + ", ");
+        }
+        System.out.print(i + ".");
+    }
+
+    public void oddEvenAddition(int n) {
+        for (int i = 1; i <= n; i++) {
+            System.out.println((i*2-1) + " + " + (i*2) + " = " + (i*4-1));
         }
     }
 }
