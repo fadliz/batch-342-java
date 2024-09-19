@@ -128,4 +128,31 @@ public class DailyTraining {
             }
         }
     }
+
+    // DAY 03
+    public String dayName(int number) {
+        return switch (number) {
+            case 1 -> "Senin";
+            case 2 -> "Selasa";
+            case 3 -> "Rabu";
+            case 4 -> "Kamis";
+            case 5 -> "Jumat";
+            case 6 -> "Sabtu";
+            case 7 -> "Minggu";
+            default -> "Urutan Hari tidak ditemukan di planet bumi";
+        };
+    }
+
+    public int DayNumber(String day) {
+        return switch (day.toLowerCase()) {
+            case "senin" -> 1;
+            case "selasa" -> 2;
+            case "rabu" -> 3;
+            case "kamis" -> 4;
+            case "jumat" -> 5;
+            case "sabtu" -> 6;
+            case "minggu" -> 7;
+            default -> -1;
+        };
+    }
 }
