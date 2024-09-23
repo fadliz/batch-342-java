@@ -6,11 +6,13 @@ public class App {
             DayFive training = new DayFive();
             
             System.out.print("Input Number : ");
-            int numberTwo = Integer.parseInt(scn.nextLine());
-            training.patternedAsteriskOne(numberTwo);
+            int number = Integer.parseInt(scn.nextLine());
+            // training.patternedAsteriskOne(number);
+            training.reversedCountMatrix(number);
             System.out.println();
-            training.patternedAsteriskTwo(numberTwo);
-
+            // training.patternedAsteriskTwo(number);
+            training.oddEvenCountMatrix(number);
+            
             scn.close();
         }
     }
