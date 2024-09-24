@@ -1,5 +1,6 @@
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
@@ -118,13 +119,49 @@ public class DaySix {
             } while (inputMenu != 0);
             System.out.println();
             System.out.println("Calculating . . .");
-            int peopleCount = adultMale+adultFemale+teenager+kids+toddlers;
-            if (peopleCount % 2 != 0 && peopleCount > 5) adultFemale *= 2;
-            double portionCount = adultMale*2 + adultFemale + teenager + (kids/2) + toddlers;
+            int peopleCount = adultMale + adultFemale + teenager + kids + toddlers;
+            if (peopleCount % 2 != 0 && peopleCount > 5)
+                adultFemale *= 2;
+            double portionCount = adultMale * 2 + adultFemale + teenager + (kids / 2) + toddlers;
             System.out.println("Portion of foods eaten -> " + portionCount);
             System.out.println();
             System.out.println("Quitting . . .");
         }
+    }
+
+    // alt no.6 using 1 string input
+    public void foodPortion(String input) {
+        String[] words = input.trim().replaceAll(",", "").split("orang");
+        HashMap<String, Integer> portions = new HashMap<>();
+        for (String string : words) {
+            String[] parts = string.toLowerCase().trim().split(" = ");
+            String key = parts[0].trim().replace(" dewasa", "");
+            String val = parts[1].trim();
+            if (portions.containsKey(key)) portions.put(key, portions.get(key)+Integer.valueOf(val));
+            portions.putIfAbsent(key, Integer.valueOf(val));
+        }
+        final int[] peopleCount = {0};
+        portions.forEach((key,value) -> {peopleCount[0] += value;});
+        portions.forEach((key, value) -> {
+            switch (key) {
+                case "laki-laki" -> {
+                    portions.put(key,value * 2);
+                }
+                case "perempuan" -> {
+                    if (peopleCount[0] % 2 != 0 && peopleCount[0] > 5) portions.put(key,value * 2);
+                }
+                case "anak-anak" -> {
+                    portions.put(key,value / 2);
+                }
+                default -> {
+                }
+            };
+        });
+        int portionCount = 0;
+        for (Integer count : portions.values()) {
+            portionCount += count;
+        }
+        System.out.println(portionCount + " porsi");
     }
 
     // no.7

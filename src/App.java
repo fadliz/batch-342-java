@@ -14,8 +14,9 @@ public class App {
             // System.out.println(number+" botol = "
             // +training.convertVolumes(number, words)
             // +" "+words);
-
-            training.FoodPortion();
+            String word = "Laki-laki dewasa = 3 orang, Perempuan dewasa = 1 orang, Balita = 1 orang, Laki-laki dewasa = 1 orang";
+            training.foodPortion(word);
+            // training.FoodPortion();
             scn.close();
         }
     }
