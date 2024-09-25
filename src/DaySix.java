@@ -9,19 +9,18 @@ import java.util.Set;
 
 public class DaySix {
     public void sortWords(String str) {
-        String lowerStr = str.toLowerCase().trim();
+        String lowerStr = str.toLowerCase().trim(); //FIXME:either add .replaceAll(" ","")
         String vokal = ""; // Kata ChatGPT improve pake string builder
         String konsonan = ""; // Kata ChatGPT improve pake string builder
         char[] chrs = lowerStr.toCharArray();
         Arrays.sort(chrs);
-        for (Character chr : chrs) {
+        for (Character chr : chrs) { //FIXME: or check if isLetter here
             if ("aiueo".contains(chr.toString())) { // Kata ChatGPT improve pake HashSet
                 vokal += chr.toString(); // Kata ChatGPT improve pake string builder append
             } else {
                 konsonan += chr.toString(); // Kata ChatGPT improve pake string builder append
             }
         }
-
         System.out.println(
                 "Huruf Vokal : " + vokal +
                         "\nHuruf Konsonan : " + konsonan);
@@ -132,13 +131,14 @@ public class DaySix {
     // alt no.6 using 1 string input
     public void foodPortion(String input) {
         String[] words = input.trim().replaceAll(",", "").split("orang");
-        HashMap<String, Integer> portions = new HashMap<>();
+        HashMap<String, Double> portions = new HashMap<>();
         for (String string : words) {
             String[] parts = string.toLowerCase().trim().split(" = ");
             String key = parts[0].trim().replace(" dewasa", "");
+            System.out.println(key);
             String val = parts[1].trim();
-            if (portions.containsKey(key)) portions.put(key, portions.get(key)+Integer.valueOf(val));
-            portions.putIfAbsent(key, Integer.valueOf(val));
+            if (portions.containsKey(key)) portions.put(key, portions.get(key)+Double.valueOf(val));
+            portions.putIfAbsent(key, Double.valueOf(val));
         }
         final int[] peopleCount = {0};
         portions.forEach((key,value) -> {peopleCount[0] += value;});
@@ -151,14 +151,15 @@ public class DaySix {
                     if (peopleCount[0] % 2 != 0 && peopleCount[0] > 5) portions.put(key,value * 2);
                 }
                 case "anak-anak" -> {
-                    portions.put(key,value / 2);
+                    portions.put(key,value /2);
                 }
                 default -> {
                 }
             };
         });
-        int portionCount = 0;
-        for (Integer count : portions.values()) {
+        double portionCount = 0;
+        for (Double count : portions.values()) {
+            System.out.println(count);
             portionCount += count;
         }
         System.out.println(portionCount + " porsi");

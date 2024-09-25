@@ -1,0 +1,33 @@
+// case scan nextint no continuation
+//         int n ;
+//             while (true) { 
+//                 while (true) { 
+//                    try {
+//                        n = scn.nextInt(); 
+//                        break;
+//                    } catch (Exception e) {
+//                         System.out.println(e);
+//                         scn.next();
+//                         continue;
+//                    }
+//                 }
+//             }
+
+// case varargs, val becomes an array of type
+// public void sum(int... val) {
+//     System.out.println(val);
+// }
+
+// case varargs method overloading
+// overload method with static number of args is
+// higher in hierarchy
+// public static int sum(int... val) {
+//     int sum = 0;
+//     for (int i : val) {
+//         sum += i;
+//     }
+//     return sum;
+// }
+// public static int sum(int x, int y) {
+//     return x*y;
+// }
