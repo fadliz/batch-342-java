@@ -9,7 +9,13 @@ public class App {
         String cont;
         do {
             System.out.print((char)27+"[0m");
-            calculator.calculate();
+            try {
+                calculator.calculate();
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input "+e.getMessage());
+                System.out.println("Quitting Program . . . ");
+                break;
+            }
             System.out.println("Result : " + calculator.getResult());
             calculator.outputResultHistory();
             System.out.print((char)27+"[0m");

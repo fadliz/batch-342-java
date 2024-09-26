@@ -65,7 +65,7 @@ public class Calculator {
             num1 = result;
         }
         menu();
-        System.out.print("Pick Operations : ");
+        System.out.print("Pick Operation : ");
         Short operation = Short.valueOf(scanner.nextLine());
         switch (operation) {
             case 1 -> {
