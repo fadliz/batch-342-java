@@ -1,3 +1,4 @@
+package trainings;
 public class DayOne {
     public String generational(int year) {
         String Generation = "";

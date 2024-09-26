@@ -1,3 +1,4 @@
+package trainings;
 public class WarmupTwo {
     public String stringTimes(String str, int n) {
         String bigger = "";

@@ -1,3 +1,4 @@
+package trainings;
 public class DayFour {
     public void matrixIndexPrint(int size) {
         System.out.println(((char)27 + "[4m--------").repeat(size) + ((char)27 + "[4m-"));

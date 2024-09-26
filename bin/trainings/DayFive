@@ -1,3 +1,4 @@
+package trainings;
 import java.util.Arrays;
 
 public class DayFive {
