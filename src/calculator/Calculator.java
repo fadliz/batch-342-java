@@ -6,15 +6,17 @@ import java.util.Scanner;
 public class Calculator {
     private final Scanner scanner;
     private Double result;
-    private static final ArrayList<Double> resultHistory = new ArrayList<>();
+    private final ArrayList<Double> resultHistory ;
 
     public Calculator() {
         this.scanner = new Scanner(System.in);
+        this.resultHistory = new ArrayList<>();
     }
 
     public Double getResult() {
         return result;
     }
+    
 
     public void addition(Double num1, Double num2) {
         this.result = num1 + num2;
