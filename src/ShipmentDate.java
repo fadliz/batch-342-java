@@ -72,7 +72,7 @@ public class ShipmentDate {
                 countDate = countDate > 31 ? countDate - 31 : countDate;
                 if (daysMap.get("sabtu") == dayOfWeek || daysMap.get("minggu") == dayOfWeek) {
                     estimatedTimeTaken++;
-                } else if (dayOfHolidays.containsKey(countDate)) {
+                } else if (dayOfHolidays.containsKey(countDate) && this.dateShipped + i <= 31) {
                     if (daysMap.get(dayOfHolidays.get(countDate)) < 6) {
                         estimatedTimeTaken++;
                     }
@@ -93,3 +93,5 @@ public class ShipmentDate {
         }
     }
 }
+
+

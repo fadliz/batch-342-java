@@ -9,7 +9,7 @@ public class App {
 
     public static void main(String[] args) {
         Calculator calculator = new Calculator();
-        int option = 2;
+        int option = 4;
         switch (option) {
             case 1 -> {
                 String cont;
