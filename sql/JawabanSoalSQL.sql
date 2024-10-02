@@ -48,6 +48,19 @@ join (
 where lower(m.nama_mahasiswa) like '%budi%';
 
 --no8 skip
+create view data_mahasiswa as
+select m.kode_mahasiswa , m.nama_mahasiswa , j.nama_jurusan , a.deskripsi as agama , sub.nama_dosen ,j.status_jurusan , sub.deskripsi
+from mahasiswa m 
+join agama a on a.kode_agama = m.kode_agama 
+join jurusan j on j.kode_jurusan = m.kode_jurusan 
+join (
+	select d.nama_dosen, td.deskripsi, d.kode_jurusan
+	from dosen d 
+	join type_dosen td on d.kode_type_dosen = td.kode_type_dosen
+) as sub on sub.kode_jurusan = j.kode_jurusan 
+where lower(m.nama_mahasiswa) like '%budi%';	
+select * from data_mahasiswa dm ;
+
 
 --no9
 select m.*, sub.nama_ujian, sub.nilai
