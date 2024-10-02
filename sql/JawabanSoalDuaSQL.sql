@@ -28,15 +28,15 @@ join biodata b on e.biodata_id = b.id
 order by GajiBaru desc;
 
 -- 6. Tampilkan nama karyawan, jenis perjalanan dinas, dan total pengeluarannya selama perjalanan dinas tersebut
-select trim(concat(b.first_name, ' ', b.last_name)) as name, sub.jenis_perjalanan, sub.total_pengeluaran, sub.travel_fee
+select trim(concat(b.first_name, ' ', b.last_name)) as name, sub.jenis_perjalanan, sub.total_pengeluaran
 from employee e 
 join biodata b on e.biodata_id = b.id 
 join (
-	select tr.id, tr.employee_id, tt.name as jenis_perjalanan, sum(ts.item_cost) as total_pengeluaran, tt.travel_fee
+	select tr.id, tr.employee_id, tt.name as jenis_perjalanan, (sum(ts.item_cost)+tt.travel_fee) as total_pengeluaran
 	from travel_request tr 
 	join travel_settlement ts on ts.travel_request_id = tr.id
 	join travel_type tt on tt.id = tr.travel_type_id
-	group by 1,2,3,5
+	group by 1,2,3,tt.travel_fee
 ) as sub on sub.employee_id = e.id;
 
 select tr.id, tt.name as jenis_perjalanan, sum(ts.item_cost) as total_pengeluaran
