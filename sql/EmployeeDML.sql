@@ -1,36 +1,35 @@
 insert into
-    travel_type (id, name, travel_fee)
+    travel_type (name, travel_fee)
 values
-    (1, 'In Indonesia', 200000),
-    (2, 'Out Indonesia', 350000);
+    ('In Indonesia', 200000),
+    ('Out Indonesia', 350000);
 
 insert into
-    leave (id, type, name)
+    leave (type, name)
 values
-    (1, 'Regular', 'Cuti Tahunan'),
-    (2, 'Khusus', 'Cuti Menikah'),
-    (3, 'Khusus', 'Cuti Haji & Umroh'),
-    (4, 'Khusus', 'Melahirkan');
+    ('Regular', 'Cuti Tahunan'),
+    ('Khusus', 'Cuti Menikah'),
+    ('Khusus', 'Cuti Haji & Umroh'),
+    ('Khusus', 'Melahirkan');
 
 insert into
-    department (id, name)
+    department (name)
 values
-    (1, 'Recruitment'),
-    (2, 'Sales'),
-    (3, 'Human Resource'),
-    (4, 'General Affair');
+    ('Recruitment'),
+    ('Sales'),
+    ('Human Resource'),
+    ('General Affair');
 
 insert into
-    position(id, name)
+    position(name)
 values
-    (1, 'Direktur'),
-    (2, 'General Manager'),
-    (3, 'Manager'),
-    (4, 'Staff');
+    ('Direktur'),
+    ('General Manager'),
+    ('Manager'),
+    ('Staff');
 
 insert into
     biodata (
-        id,
         first_name,
         last_name,
         dob,
@@ -40,106 +39,99 @@ insert into
     )
 values
     (
-        1,
         'Raya',
         'Indriyani',
-        '1991-01-01',
+        to_date ('1991-01-01', 'YYYY-MM-DD'),
         'Bali',
         'Jl. Raya Baru, Bali',
         false
     ),
     (
-        2,
         'Rere',
         'Wulandari',
-        '1992-01-02',
+        to_date ('1992-01-02', 'YYYY-MM-DD'),
         'Bandung',
         'Jl. Berkah Ramadhan, Bandung',
         false
     ),
     (
-        3,
         'Bunga',
         'Maria',
-        '1991-03-03',
+        to_date ('1991-03-03', 'YYYY-MM-DD'),
         'Jakarta',
         'Jl. Mawar Semerbak, Bogor',
         true
     ),
     (
-        4,
         'Natasha',
         'Wulan',
-        '1990-04-10',
+        to_date ('1990-04-10', 'YYYY-MM-DD'),
         'Jakarta',
         'Jl. Mawar Harum, Jakarta',
         false
     ),
     (
-        5,
         'Zahra',
         'Aurelia Putri',
-        '1991-03-03',
+        to_date ('1991-03-03', 'YYYY-MM-DD'),
         'Jakarta',
         'Jl. Mawar Semerbak, Bogor',
         true
     ),
     (
-        6,
         'Katniss',
         'Everdeen',
-        '1989-01-12',
+        to_date ('1989-01-12', 'YYYY-MM-DD'),
         'Jakarta',
         'Jl. Bunga Melati, Jakarta',
         true
     );
 
 insert into
-    employee (id, biodata_id, nip, status, salary)
+    employee (biodata_id, nip, status, salary)
 values
-    (1, 1, 'NX001', 'Permanen', 12000000),
-    (2, 2, 'NX002', 'Kontrak', 15000000),
-    (3, 4, 'NX003', 'Permanen', 13500000),
-    (4, 5, 'NX004', 'Permanen', 12000000),
-    (5, 6, 'NX005', 'Permanen', 17000000),
-    (6, 3, 'NX006', 'Permanen', 16000000);
+    (1, 'NX001', 'Permanen', 12000000),
+    (2, 'NX002', 'Kontrak', 15000000),
+    (4, 'NX003', 'Permanen', 13500000),
+    (5, 'NX004', 'Permanen', 12000000),
+    (6, 'NX005', 'Permanen', 17000000),
+    (3, 'NX006', 'Permanen', 16000000);
 
 insert into
-    employee_position (id, employee_id, position_id)
+    employee_position (employee_id, position_id)
 values
-    (1, 5, 1),
-    (2, 4, 2),
-    (3, 3, 3),
-    (4, 2, 4),
-    (5, 1, 4),
-    (6, 6, 4);
+    (5, 1),
+    (4, 2),
+    (3, 3),
+    (2, 4),
+    (1, 4),
+    (6, 4);
 
 insert into
-    family (id, biodata_id, name, status)
+    family (biodata_id, name, status)
 values
-    (1, 3, 'Azka Fadlan Zikrullah', 'Suami'),
-    (2, 3, 'Primrose Everdeen', 'Anak'),
-    (3, 5, 'Jaka Samudera Buana', 'Suami'),
-    (4, 5, 'Friska Davira', 'Anak'),
-    (5, 5, 'Harum Indah Az Zahra', 'Anak'),
-    (6, 6, 'Adya Pratama Yuda', 'Suami');
+    (3, 'Azka Fadlan Zikrullah', 'Suami'),
+    (3, 'Primrose Everdeen', 'Anak'),
+    (5, 'Jaka Samudera Buana', 'Suami'),
+    (5, 'Friska Davira', 'Anak'),
+    (5, 'Harum Indah Az Zahra', 'Anak'),
+    (6, 'Adya Pratama Yuda', 'Suami');
 
 insert into
-    contact_person (id, biodata_id, type, contact)
+    contact_person (biodata_id, type, contact)
 values
-    (1, 1, 'MAIL', 'raya.indriyani@gmail.com'),
-    (2, 1, 'PHONE', '085612345678'),
-    (3, 2, 'MAIL', 'rere.wulandari@gmail.com'),
-    (4, 2, 'PHONE', '081312345678'),
-    (5, 2, 'PHONE', '087812345678'),
-    (6, 3, 'MAIL', 'bunga.maria@gmail.com'),
-    (7, 4, 'MAIL', 'natasha.wulan@gmail.com'),
-    (8, 5, 'MAIL', 'zahra.putri@gmail.com'),
-    (9, 6, 'MAIL', 'katnis.everdeen@gmail.com');
+    (1, 'MAIL', 'raya.indriyani@gmail.com'),
+    (1, 'PHONE', '085612345678'),
+    (2, 'MAIL', 'rere.wulandari@gmail.com'),
+    (2, 'PHONE', '081312345678'),
+    (2, 'PHONE', '087812345678'),
+    (3, 'MAIL', 'bunga.maria@gmail.com'),
+    (4, 'MAIL', 'natasha.wulan@gmail.com'),
+    (5, 'MAIL', 'zahra.putri@gmail.com'),
+    (6, 'MAIL', 'katnis.everdeen@gmail.com');
 
 insert into
     leave_request (
-        id,
         employee_id,
         leave_id,
         start_date,
@@ -150,13 +142,11 @@ values
     (
         1,
         1,
-        1,
         to_date ('2020-10-10', 'YYYY-MM-DD'),
         to_date ('2020-10-12', 'YYYY-MM-DD'),
         'Liburan'
     ),
     (
-        2,
         1,
         1,
         to_date ('2020-11-12', 'YYYY-MM-DD'),
@@ -164,7 +154,6 @@ values
         'Acara Keluarga'
     ),
     (
-        3,
         2,
         2,
         to_date ('2020-05-05', 'YYYY-MM-DD'),
@@ -172,7 +161,6 @@ values
         'Menikah'
     ),
     (
-        4,
         2,
         1,
         to_date ('2020-09-09', 'YYYY-MM-DD'),
@@ -180,7 +168,6 @@ values
         'Touring'
     ),
     (
-        5,
         2,
         1,
         to_date ('2020-12-24', 'YYYY-MM-DD'),
@@ -190,7 +177,6 @@ values
 
 insert into
     travel_request (
-        id,
         employee_id,
         travel_type_id,
         start_date,
@@ -200,19 +186,16 @@ values
     (
         1,
         1,
-        1,
         to_date ('2020-07-07', 'YYYY-MM-DD'),
         to_date ('2020-07-08', 'YYYY-MM-DD')
     ),
     (
-        2,
         1,
         1,
         to_date ('2020-08-07', 'YYYY-MM-DD'),
         to_date ('2020-08-08', 'YYYY-MM-DD')
     ),
     (
-        3,
         2,
         2,
         to_date ('2020-04-04', 'YYYY-MM-DD'),
@@ -220,25 +203,25 @@ values
     );
 
 insert into
-    travel_settlement (id, travel_request_id, item_name, item_cost)
+    travel_settlement (travel_request_id, item_name, item_cost)
 values
-    (1, 1, 'Tiket travel Do-Car berangkat', 165000),
-    (2, 1, 'Hotel', 750000),
-    (3, 1, 'Tiket travel Do-Car pulang', 165000),
-    (4, 2, 'Tiket pesawat berangkat', 750000),
-    (5, 2, 'Hotel', 650000),
-    (6, 2, 'Tiket pesawat pulang', 1250000),
-    (7, 3, 'Tiket pesawat berangkat', 4750000),
-    (8, 3, 'Hotel', 6000000),
-    (9, 2, 'Tiket pesawat pulang', 4250000);
+    (1, 'Tiket travel Do-Car berangkat', 165000),
+    (1, 'Hotel', 750000),
+    (1, 'Tiket travel Do-Car pulang', 165000),
+    (2, 'Tiket pesawat berangkat', 750000),
+    (2, 'Hotel', 650000),
+    (2, 'Tiket pesawat pulang', 1250000),
+    (3, 'Tiket pesawat berangkat', 4750000),
+    (3, 'Hotel', 6000000),
+    (2, 'Tiket pesawat pulang', 4250000);
 
 insert into
-    employee_leave (id, employee_id, period, regular_quota)
+    employee_leave (employee_id, period, regular_quota)
 values
-    (1, 1, 2020, 16),
-    (2, 2, 2020, 12),
-    (3, 1, 2021, 16),
-    (4, 2, 2021, 12),
-    (5, 4, 2021, 12),
-    (6, 5, 2021, 12),
-    (7, 6, 2021, 12);
+    (1, 2020, 16),
+    (2, 2020, 12),
+    (1, 2021, 16),
+    (2, 2021, 12),
+    (4, 2021, 12),
+    (5, 2021, 12),
+    (6, 2021, 12);
