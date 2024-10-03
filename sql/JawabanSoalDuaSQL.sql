@@ -176,14 +176,39 @@ join (
 -- Tambahkan data cuti tahun 2021 terhadap semua karyawan(termasuk karyawan baru yang sudah ditambahkan pada soal sebelumnya). 
 -- Lalu hitung jumlah cuti yang sudah diambil pada tahun 2020 dari masing-masing karyawan.
 -- Constraint : Data cuti karyawan baru tidak perlu ditampilkan
-INSERT INTO employee_leave (employee_id, period, regular_quota)
-SELECT e.id, '2021', 12  -- Assuming 12 leave days as an example
-FROM employee e
-WHERE NOT EXISTS (
-    SELECT 1 
-    FROM employee_leave lr 
-    WHERE lr.employee_id = e.id AND lr.period like '2021'
+insert into employee_leave (employee_id, period, regular_quota)
+select e.id, '2021', 12  -- Assuming 12 leave days as an example
+from employee e
+where not exists (
+    select 1 
+    from employee_leave lr 
+    where lr.employee_id = e.id and lr.period like '2021'
 );
+
+drop view if exists generated_leave_request;
+create or replace view generated_leave_request as
+select 
+	e.id as emp_id,
+	(floor(random() * (select max(l.id)  from leave l)) + 1)::int as gen_id,
+	(timestamp '2021-01-01' +
+	random() * (timestamp '2021-12-31' -
+	timestamp '2021-01-01'))::date as start_date
+from employee e;
+select * from generated_leave_request glr;
+
+insert into leave_request (employee_id,leave_id,start_date,end_date,reason)
+select 
+	glr.emp_id,
+	glr.gen_id,
+	glr.start_date,
+	glr.start_date + (2 + floor(random() * 2))::int as end_date,
+	case gen_id when 1 then 'Liburan'
+	when 2 then 'Menikah'
+	when 3 then 'Umroh'
+	when 4 then 'Melahirkan'
+	end
+from generated_leave_request glr
+on conflict do nothing ;
 
 select trim(concat(b.first_name, ' ', b.last_name)) as nama_karyawan, (count(sub)) as "ambil cuti"
 from employee_leave el 
@@ -229,6 +254,7 @@ join biodata b on b.id = e.biodata_id
 
 -- 20. Jika digabungkan antara cuti dan perjalanan dinas, 
 -- berapa hari Raya tidak berada di kantor pada tahun 2020?
+drop view if exists data_absent;
 create or replace view data_absent as
 select e.id, tr.start_date
 from employee e 
@@ -244,8 +270,8 @@ join (
 	select lr.start_date, lr.employee_id
 	from leave_request lr 
 	where date_part('year',lr.start_date) = 2020
-) as lr on lr.employee_id = e.id  
-;
+) as lr on lr.employee_id = e.id;
+select * from data_absent da ;
 
 select trim(concat(b.first_name, ' ', b.last_name)) as name, concat(count(*), ' hari') as tidak_hadir
 from employee e 
