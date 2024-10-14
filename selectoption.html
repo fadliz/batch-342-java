@@ -7,11 +7,19 @@
 </head>
 <body>
     <h3>Select your favorite fruit:</h3>
-    <select id="fruitSelect">
+    <select id="fruitSelect" >
+        <optgroup>
+            <option value="Apple">Apple</option>
+            <option value="Banana">Banana</option>
+            <option value="Cherry" selected>Cherry</option>
+            <option value="Date">Date</option>
+        </optgroup>
+        <hr>
         <option value="Apple">Apple</option>
         <option value="Banana">Banana</option>
-        <option value="Cherry">Cherry</option>
+        <option value="Cherry" selected>Cherry</option>
         <option value="Date">Date</option>
+        <option >text no value</option>
     </select>
 
     <button onclick="checkFruit()">Submit</button>
@@ -21,7 +29,7 @@
     <script>
         function checkFruit() {
             let selectedFruit = document.getElementById('fruitSelect').value;
-            let selected = document.getElementById('fruitSelect');
+            let selected = document.getElementById('fruitSelect').value;
             console.log(selected);
             document.getElementById('output').innerHTML = 'You selected: ' + selectedFruit;
         }
