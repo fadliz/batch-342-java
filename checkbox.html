@@ -23,12 +23,18 @@
     <script>
         function checkSelection() {
             let selected = [];
+            let check = document.getElementById("hobby1");
+            console.log(check.checked);
             let checkboxes = document.querySelectorAll('input[name="hobby"]:checked');
             checkboxes.forEach((checkbox) => {
                 selected.push(checkbox.value);
+                console.log(checkbox.checked);
             });
             document.getElementById('output').innerHTML = 'You selected: ' + selected.join(', ');
         }
     </script>
 </body>
 </html>
+
+<!-- chat : Checkbox digunakan untuk memilih beberapa opsi. Setiap checkbox bisa dinyalakan (checked) atau dimatikan (unchecked).
+Ketika pengguna mencentang checkbox, properti checked akan menjadi true, dan ketika tidak, akan menjadi false. -->

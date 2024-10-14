@@ -21,8 +21,12 @@
     <script>
         function checkFruit() {
             let selectedFruit = document.getElementById('fruitSelect').value;
+            let selected = document.getElementById('fruitSelect');
+            console.log(selected);
             document.getElementById('output').innerHTML = 'You selected: ' + selectedFruit;
         }
     </script>
 </body>
 </html>
+<!-- chat : Select option digunakan untuk membuat dropdown dengan beberapa opsi.
+Hanya satu pilihan yang dapat dipilih dari dropdown, tetapi kita bisa menggunakan multiple untuk memungkinkan beberapa pilihan. -->
