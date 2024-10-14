@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Option Example</title>
+</head>
+<body>
+    <h3>Select your favorite fruit:</h3>
+    <select id="fruitSelect">
+        <option value="Apple">Apple</option>
+        <option value="Banana">Banana</option>
+        <option value="Cherry">Cherry</option>
+        <option value="Date">Date</option>
+    </select>
+
+    <button onclick="checkFruit()">Submit</button>
+
+    <p id="output"></p>
+
+    <script>
+        function checkFruit() {
+            let selectedFruit = document.getElementById('fruitSelect').value;
+            document.getElementById('output').innerHTML = 'You selected: ' + selectedFruit;
+        }
+    </script>
+</body>
+</html>

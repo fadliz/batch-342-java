@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Radio Button Example</title>
+</head>
+<body>
+    <h3>Select your gender:</h3>
+    <input type="radio" id="male" name="gender" value="Male">
+    <label for="male">Male</label><br>
+
+    <input type="radio" id="female" name="gender" value="Female">
+    <label for="female">Female</label><br>
+
+    <input type="radio" id="other" name="gender" value="Other">
+    <label for="other">Other</label><br>
+
+    <button onclick="checkGender()">Submit</button>
+
+    <p id="output"></p>
+
+    <script>
+        function checkGender() {
+            let selectedGender = document.querySelector('input[name="gender"]:checked').value;
+            document.getElementById('output').innerHTML = 'You selected: ' + selectedGender;
+        }
+    </script>
+</body>
+</html>
