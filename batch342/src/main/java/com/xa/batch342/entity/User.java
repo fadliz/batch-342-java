@@ -1,4 +1,6 @@
-package com.xa.batch342.entities;
+package com.xa.batch342.entity;
+
+import org.hibernate.annotations.CreationTimestamp;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -9,7 +11,6 @@ import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import lombok.Data;
-import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
 @Data
