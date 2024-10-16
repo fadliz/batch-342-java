@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.xa.batch342.entities.Category;
-import com.xa.batch342.services.CategoryService;
+import com.xa.batch342.services.impl.CategoryServiceImpl;
 
 
 @RestController
@@ -19,11 +19,11 @@ import com.xa.batch342.services.CategoryService;
 public class CategoryRestController {
     
     @Autowired
-    CategoryService categoryService;
+    CategoryServiceImpl categoryService;
 
     @GetMapping("")
-    public ResponseEntity<?> getMethodName() {
-        return ResponseEntity.ok(categoryService.getAllCategories());
+    public ResponseEntity<?> getProducts() {
+        return ResponseEntity.ok(categoryService.getCategories());
     }
     
     @GetMapping("/{id}")

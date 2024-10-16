@@ -8,8 +8,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-// import com.github.javafaker.Faker;
 import com.xa.batch342.entities.Category;
+import com.xa.batch342.entities.Product;
 import com.xa.batch342.repositories.CategoryRepository;
 
 @SpringBootApplication
@@ -29,11 +29,11 @@ public class Batch342Application {
 			Category food = new Category("Food", "food", "All kinds of food");
 			Category beverage = new Category("Beverage", "beverage", "All kinds of drinks");
 			Category medicine = new Category("Medicine", "medicine", "All kinds of meds");
-			// Category fastFood = new Category("Fast Food", "fast-food");
 			categoryRepository.save(food);
 			categoryRepository.save(beverage);
 			categoryRepository.save(medicine);
-			// categoryRepository.save(fastFood);
+
+			Product nasiGoreng = new Product("Nasi Goreng", " ", 20000);
 
 			// Faker faker = new Faker(new Locale("es"));
 			// int categories = 5;
