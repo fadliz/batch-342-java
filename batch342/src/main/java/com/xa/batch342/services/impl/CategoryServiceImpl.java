@@ -20,22 +20,22 @@ public class CategoryServiceImpl implements CategoryService{
     private CategoryRepository categoryRepository;
 
     @Override
-    public Category createCategory(String name, String description) {
-        Category category = new Category();
-        category.setName(name);
-        category.setDescription(description);
-        category.setSlug(SlugUtils.toSlug(name)); // Generate the slug from name
+    public Category createCategory(Category category) { // Generate the slug from name
         return categoryRepository.save(category);
     }
 
     @Override
-    public Category updateCategory(Long id, String name, String description) {
+    public Category updateCategory(Long id, Category category) {
         Optional<Category> existingCategoryOpt = categoryRepository.findById(id);
         if (existingCategoryOpt.isPresent()) {
             Category existingCategory = existingCategoryOpt.get();
-            existingCategory.setName(name);
-            existingCategory.setDescription(description);
-            existingCategory.setSlug(SlugUtils.toSlug(name)); // Update the slug if name changes
+            if (category.getSlug() != null) {
+                existingCategory.setSlug(category.getSlug());
+            } else {
+                existingCategory.setSlug(SlugUtils.toSlug(category.getName()));
+            }
+            existingCategory.setName(category.getName());
+            existingCategory.setModifiedBy(category.getModifiedBy());
             return categoryRepository.save(existingCategory);
         } else {
             throw new RuntimeException("Category not found");
@@ -44,7 +44,7 @@ public class CategoryServiceImpl implements CategoryService{
 
     @Override
     public void deleteCategory(Long id) {
-        categoryRepository.deleteById(id);
+        categoryRepository.deleteById(id); 
     }
 
     @Override

@@ -1,5 +1,7 @@
 package com.xa.batch342.entities;
 
+import java.math.BigDecimal;
+
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.SQLRestriction;
 
@@ -12,6 +14,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
@@ -20,21 +23,21 @@ import lombok.EqualsAndHashCode;
 @Entity
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Table(name = "products")
-@SQLDelete(sql = "UPDATE products SET is_deleted = true, deleted_at = NOW() WHERE id = ?")
+@Table(name = "variants")
+@SQLDelete(sql = "UPDATE variants SET is_deleted = true, deleted_at = NOW() WHERE id = ?")
 @SQLRestriction("is_deleted = false")
-public class Product extends BaseEntity {
+public class Variant extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
     @ManyToOne(fetch = FetchType.EAGER) // FIXME: DTO biar ga berat
-    @JoinColumn(name = "category_id", nullable = false, insertable = false, updatable = false)
-    private Category category;
+    @JoinColumn(name = "product_id", nullable = false, insertable = false, updatable = false)
+    private Product product;
 
-    @Column(name = "category_id", nullable = false)
-    private Long categoryId;
+    @Column(name = "product_id", nullable = false)
+    private Long productId;
 
     @Column(name = "slug", length = 50, nullable = false, unique = true)
     private String slug;
@@ -42,12 +45,25 @@ public class Product extends BaseEntity {
     @Column(name = "name", length = 50, nullable = false, unique = true)
     private String name;
 
-    public Product() {
+    @Lob
+    @Column(name = "description", columnDefinition="TEXT", nullable = true)
+    private String description;
+
+    @Column(name = "price", nullable = false)
+    private BigDecimal price;
+
+    @Column(name = "stock", nullable = false)
+    private BigDecimal stock;
+
+    public Variant() {
     }
 
-    public Product(Long categoryId, String name, String createdBy) {
-        this.categoryId = categoryId;
+    public Variant(Long productId, String name, String description, BigDecimal price, BigDecimal stock, String createdBy) {
+        this.productId = productId;
         this.name = name;
+        this.description = description;
+        this.price = price;
+        this.stock = stock;
         this.slug = SlugUtils.toSlug(name);
         this.setCreatedBy(createdBy);
     }

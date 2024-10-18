@@ -12,7 +12,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.xa.batch342.entities.Category;
 import com.xa.batch342.repositories.CategoryRepository;
-import com.xa.batch342.utils.SlugUtils;
 
 
 @Controller
@@ -33,7 +32,6 @@ public class CategoryController {
 
     @PostMapping("")
     public String saveCategory(@ModelAttribute Category category) {
-        category.setSlug(SlugUtils.toSlug(category.getName()));
         categoryRepository.save(category);
         return "redirect:/category";
     }

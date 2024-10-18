@@ -22,7 +22,6 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product createProduct(Product product) {
-        product.setSlug(SlugUtils.toSlug(product.getName())); // Generate the slug from name
         return productRepository.save(product);
     }
 
@@ -32,9 +31,13 @@ public class ProductServiceImpl implements ProductService {
         if (existingProductOpt.isPresent()) {
             Product existingProduct = existingProductOpt.get();
             existingProduct.setName(product.getName());
-            existingProduct.setDescription(product.getDescription());
-            existingProduct.setSlug(product.getSlug());
-            existingProduct.setPrice(product.getPrice());
+            if (product.getSlug() != null) {
+                existingProduct.setSlug(product.getSlug());
+            } else {
+                existingProduct.setSlug(SlugUtils.toSlug(product.getName()));
+            }
+            existingProduct.setModifiedBy(product.getModifiedBy());
+            existingProduct.setCategoryId(product.getCategoryId());
             return productRepository.save(existingProduct);
         } else {
             throw new RuntimeException("Product not found");
@@ -55,7 +58,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<Product> getProducts() {
-        return productRepository.findAll();
+        return productRepository.findByCategoryIsDeletedFalse();
     }
 
 }

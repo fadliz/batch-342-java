@@ -5,9 +5,9 @@ import java.util.List;
 import com.xa.batch342.entities.Category;
 
 public interface CategoryService {
-    Category createCategory(String name, String description);
+    Category createCategory(Category category);
 
-    Category updateCategory(Long id, String name, String description);
+    Category updateCategory(Long id, Category category);
 
     void deleteCategory(Long id);
 

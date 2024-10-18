@@ -1,11 +1,15 @@
 package com.xa.batch342.entities;
 
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.SQLRestriction;
+
+import com.xa.batch342.utils.SlugUtils;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -14,30 +18,29 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @Table(name = "categories")
+@SQLDelete(sql = "UPDATE categories SET is_deleted = true, deleted_at = NOW() WHERE id = ?")
+@SQLRestriction("is_deleted = false")
 public class Category extends BaseEntity {
 
-    public Category(){
-
-    }
-
-    public Category(String name, String slug, String description){
-        this.name = name;
-        this.slug = slug;
-        this.description = description;
-    }
-    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "name", length = 50)
-    private String name;
-
-    @Column(name = "slug", length = 50, unique = true)
+    @Column(name = "slug", length = 50, nullable = false, unique = true)
     private String slug;
 
-    @Lob
-    @Column(name = "description", columnDefinition="TEXT")
-    private String description;
+    @Column(name = "name", length = 50, nullable = false, unique = true)
+    private String name;
+
+    public Category() {
+
+    }
+
+    public Category(String name, String createdBy) {
+        this.name = name;
+        this.slug = SlugUtils.toSlug(name);
+        this.setCreatedBy(createdBy);
+    }
+
 }

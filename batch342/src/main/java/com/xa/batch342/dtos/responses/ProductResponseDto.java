@@ -2,12 +2,16 @@ package com.xa.batch342.dtos.responses;
 
 import java.time.LocalDateTime;
 
+import com.xa.batch342.entities.Category;
+
 import lombok.Data;
 
 @Data
-public class CategoryResponseDto {
-    private String name;
+public class ProductResponseDto {
+    private Category category;
+    private Long categoryId;
     private String slug;
+    private String name;
     private boolean isDeleted;
     private LocalDateTime deletedAt;
     private String createdBy;

@@ -8,30 +8,34 @@
             <h1 th:text="${title}"></h1>
             <!-- Button trigger modal -->
             <button type="button" class="btn btn-primary mt-1 mb-3" onclick="openModal('add')">
-                Add Category Data
+                Add Product Data
             </button>
 
             <table class="table table-bordered table-striped table-hover table-sm">
                 <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Slug</th>
                         <th scope="col">Name</th>
-                        <th scope="col">Created By</th>
+                        <th scope="col">Slug</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Category</th>
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr th:each="category, iter : ${categories}">
+                    <tr th:each="product, iter : ${products}">
                         <th scope="row" th:text="${iter.count}"></th>
-                        <td th:text="${category.slug}"></td>
-                        <td th:text="${category.name}"></td>
-                        <td th:text="${category.createdBy}"></td>
+                        <td th:text="${product.name}"></td>
+                        <td th:text="${product.slug}"></td>
+                        <td th:text="${product.description}"></td>
+                        <td th:text="${product.Price}"></td>
+                        <td th:text="${product.category.name}"></td>
                         <td>
-                            <button type="button" class="btn btn-warning" th:onclick="openModal('edit', [[${category.id}]])">
+                            <button type="button" class="btn btn-warning" th:onclick="openModal('edit', [[${product.id}]])">
                                 Edit
                             </button>
-                            <button type="button" class="btn btn-danger" th:onclick="openModal('delete', [[${category.id}]])">
+                            <button type="button" class="btn btn-danger" th:onclick="openModal('delete', [[${product.id}]])">
                                 Delete
                             </button>
                         </td>
@@ -49,20 +53,26 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form id="categoryForm">
+                        <form id="productForm">
                             <!-- Name input -->
                             <div data-mdb-input-init class="form-outline mb-4">
                                 <label class="form-label" for="name" >Name</label>
                                 <input type="text" id="name" name="name" class="form-control" autocomplete="off"/>
                             </div>
 
-                            <!-- Email input -->
+                            <!-- Description input -->
                             <div data-mdb-input-init class="form-outline mb-4">
                                 <label class="form-label" for="description">Description</label>
                                 <input type="text" id="description" name="description" class="form-control" />
                             </div>
-                            <!-- Hidden input for category ID (used for editing) -->
-                            <input type="hidden" id="categoryId" name="id" autocomplete="off"/>
+
+                            <!-- Price input -->
+                            <div data-mdb-input-init class="form-outline mb-4">
+                                <label class="form-label" for="price">Price</label>
+                                <input type="text" id="price" name="price" class="form-control" />
+                            </div>
+                            <!-- Hidden input for product ID (used for editing) -->
+                            <input type="hidden" id="productId" name="id" autocomplete="off"/>
                         </form>
                         <p id="modalParagraph"></p>
                     </div>
@@ -75,7 +85,7 @@
             </div>
         </div>
 
-        <script src="js/category.js"></script>
+        <script src="js/product.js"></script>
     </section>
 </body>
 
