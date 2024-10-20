@@ -35,4 +35,5 @@ public class CategoryController {
         categoryRepository.save(category);
         return "redirect:/category";
     }
+
 }
