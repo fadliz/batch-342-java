@@ -69,7 +69,7 @@ function submitCategoryForm(method, url) {
     body: formData,
   }).then((response) => {
     if (response.ok) {
-      window.location.reload(); // Reload page after successful operation
+      window.location.reload();  
     } else {
       alert("Error saving category.");
     }
@@ -81,7 +81,7 @@ function deleteCategory(categoryId) {
     method: "DELETE",
   }).then((response) => {
     if (response.ok) {
-      window.location.reload(); // Reload page after deletion
+      window.location.reload(); 
     } else {
       alert("Error deleting category.");
     }
