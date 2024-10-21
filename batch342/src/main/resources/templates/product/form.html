@@ -3,7 +3,8 @@
         <label class="form-label" for="categoryId">Category</label>
         <select class="form-select" name="categoryId" id="categoryId">
             <option value="" selected disabled hidden>Choose here</option>
-            <option th:each="i : ${categories}" th:value="${i.id}" th:text="${i.name}" th:selected="${i.id == product.categoryId}"></option>
+            <option th:each="i : ${categories}" th:value="${i.id}" th:text="${i.name}"
+                th:selected="${i.id == product.categoryId}"></option>
         </select>
     </div>
     <div data-mdb-input-init class="form-outline mb-4">
@@ -16,4 +17,8 @@
     </div>
     <input type="hidden" id="productId" name="id" autocomplete="off" th:field="*{id}" />
     <input type="hidden" id="createdAt" name="createdAt" autocomplete="off" th:field="*{createdAt}" />
+    <label class="form-label" for="isDeleted">Is Data Deleted?</label>
+    <input type="checkbox" class="form-check-input" style="border: 1px solid #000;" id="isDeleted" name="deleted"
+        autocomplete="off" th:field="*{deleted}" />
+
 </form>

@@ -3,37 +3,46 @@
         <label class="form-label" for="categoryId">Category</label>
         <select class="form-select" name="categoryId" id="categoryId" onchange="loadProducts(this.value)">
             <option value="" selected disabled hidden>Choose here</option>
-            <option th:if="${variant.id != null}" th:each="i : ${categories}" th:value="${i.id}" th:text="${i.name}" th:selected="${i.id == variant.product.categoryId}"></option>
-            <option th:unless="${variant.id != null}" th:each="i : ${categories}" th:value="${i.id}" th:text="${i.name}" ></option>
+            <option th:if="${variant.id != null}" th:each="i : ${categories}" th:value="${i.id}" th:text="${i.name}"
+                th:selected="${i.id == variant.product.categoryId}"></option>
+            <option th:unless="${variant.id != null}" th:each="i : ${categories}" th:value="${i.id}"
+                th:text="${i.name}"></option>
         </select>
     </div>
     <div class="form-outline mb-4">
         <label class="form-label" for="productId">Product</label>
         <select class="form-select" name="productId" id="productId" th:field="*{productId}">
             <option value="" selected disabled hidden>Choose here</option>
-            <option th:each="i : ${products}" th:value="${i.id}" th:text="${i.name}"></option>
+            <option th:each="i : ${products}"
+                th:if="${variant.id != null && i.categoryId == variant.product.categoryId}" th:value="${i.id}"
+                th:text="${i.name}"></option>
         </select>
     </div>
     <div class="form-outline mb-4">
         <label class="form-label" for="name">Name</label>
-        <input type="text" id="name" name="name" class="form-control" autocomplete="off" th:field="*{name}"/>
+        <input type="text" id="name" name="name" class="form-control" autocomplete="off" th:field="*{name}" />
     </div>
     <div class="form-outline mb-4">
         <label class="form-label" for="description">Description</label>
-        <input type="text" id="description" name="description" class="form-control" autocomplete="off" th:field="*{description}"/>
+        <input type="text" id="description" name="description" class="form-control" autocomplete="off"
+            th:field="*{description}" />
     </div>
     <div class="form-outline mb-4">
         <label class="form-label" for="price">Price</label>
-        <input type="number" id="price" name="price" class="form-control" th:field="*{price}"/>
+        <input type="number" id="price" name="price" class="form-control" th:field="*{price}" />
     </div>
     <div class="form-outline mb-4">
         <label class="form-label" for="stock">Stock</label>
-        <input type="number" id="stock" name="stock" class="form-control" th:field="*{stock}"/>
+        <input type="number" id="stock" name="stock" class="form-control" th:field="*{stock}" />
     </div>
     <div class="form-outline mb-4">
         <label class="form-label" for="createdBy">Created by</label>
-        <input type="text" id="createdBy" name="createdBy" class="form-control" th:field="*{createdBy}"/>
+        <input type="text" id="createdBy" name="createdBy" class="form-control" th:field="*{createdBy}" />
     </div>
-    <input type="hidden" id="variantId" name="id" autocomplete="off"/>
+    <input type="hidden" id="variantId" name="id" autocomplete="off" th:field="*{id}" />
     <input type="hidden" id="createdAt" name="createdAt" autocomplete="off" th:field="*{createdAt}" />
+
+    <label class="form-label" for="isDeleted">Is Data Deleted?</label>
+    <input type="checkbox" class="form-check-input" style="border: 1px solid #000;" id="isDeleted" name="deleted"
+        autocomplete="off" th:field="*{deleted}" />
 </form>
