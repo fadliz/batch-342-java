@@ -7,7 +7,7 @@
         <div class="container mt-3">
             <h1 th:text="${title}"></h1>
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary mt-1 mb-3" onclick="openModal('add')">
+            <button type="button" class="btn btn-primary mt-1 mb-3" onclick="openForm()">
                 Add Category Data
             </button>
 
@@ -18,6 +18,7 @@
                         <th scope="col">Slug</th>
                         <th scope="col">Name</th>
                         <th scope="col">Created By</th>
+                        <th scope="col">Is Deleted</th>
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
@@ -27,11 +28,12 @@
                         <td th:text="${category.slug}"></td>
                         <td th:text="${category.name}"></td>
                         <td th:text="${category.createdBy}"></td>
-                        <td>
-                            <button type="button" class="btn btn-warning" th:onclick="openModal('edit', [[${category.id}]])">
+                        <td th:if="${category.isDeleted}">Yes</td>
+                        <td th:unless="${category.isDeleted}">No<td>
+                            <button type="button" class="btn btn-warning" th:onclick="editForm([[${category.id}]])">
                                 Edit
                             </button>
-                            <button type="button" class="btn btn-danger" th:onclick="openModal('delete', [[${category.id}]])">
+                            <button type="button" class="btn btn-danger" th:onclick="deleteForm([[${category.id}]])">
                                 Delete
                             </button>
                         </td>
@@ -49,26 +51,13 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form id="categoryForm">
-                            <!-- Name input -->
-                            <div data-mdb-input-init class="form-outline mb-4">
-                                <label class="form-label" for="name" >Name</label>
-                                <input type="text" id="name" name="name" class="form-control" autocomplete="off"/>
-                            </div>
 
-                            <!-- Email input -->
-                            <!-- <div data-mdb-input-init class="form-outline mb-4">
-                                <label class="form-label" for="description">Description</label>
-                                <input type="text" id="description" name="description" class="form-control" />
-                            </div> -->
-                            <!-- Hidden input for category ID (used for editing) -->
-                            <input type="hidden" id="categoryId" name="id" autocomplete="off"/>
-                        </form>
                         <p id="modalParagraph"></p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" id="saveButton" class="btn btn-primary">Save changes</button>
-                        <button type="button" id="cancelButton" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" id="cancelButton" class="btn btn-secondary"
+                            data-bs-dismiss="modal">Close</button>
                         <button type="button" id="deleteButton" class="btn btn-danger">Delete</button>
                     </div>
                 </div>

@@ -2,22 +2,20 @@ package com.xa.batch342.controllers;
 
 import java.util.List;
 
-import org.modelmapper.ModelMapper;
-import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.xa.batch342.dtos.requests.ProductRequestDto;
 import com.xa.batch342.entities.Category;
 import com.xa.batch342.entities.Product;
 import com.xa.batch342.repositories.CategoryRepository;
 import com.xa.batch342.repositories.ProductRepository;
-import com.xa.batch342.services.impl.ProductServiceImpl;
 import com.xa.batch342.utils.SlugUtils;
 
 
@@ -26,34 +24,61 @@ import com.xa.batch342.utils.SlugUtils;
 public class ProductController {
 
     @Autowired
-    ProductServiceImpl productService;
-    @Autowired
     ProductRepository productRepository;
     @Autowired
     CategoryRepository categoryRepository;
-
+    
     @GetMapping("")
     public ModelAndView getProduct() {
         ModelAndView view = new ModelAndView("product/index");
-        List<Category> categories = categoryRepository.findAll();
         List<Product> products = productRepository.findAll();
-        view.addObject("category", categories);
+        List<Category> categories = categoryRepository.findAll();
         view.addObject("products", products);
+        view.addObject("categories", categories);
         view.addObject("title", "Master Product");
         return view;
     }
 
-    @PostMapping("")
-    public String saveProduct(@RequestBody ProductRequestDto productRequestDto) {
-        ModelMapper modelMapper = new ModelMapper();
-        modelMapper.getConfiguration()
-                .setMatchingStrategy(MatchingStrategies.STRICT);
-        if (productRequestDto.getSlug() == null) {
-            productRequestDto.setSlug(SlugUtils.toSlug(productRequestDto.getName()));
-        }
-
-        Product product = modelMapper.map(productRequestDto, Product.class);
-        productService.createProduct(product);
-        return "redirect:/product";
+    @GetMapping("/form")
+    public ModelAndView form() {
+        ModelAndView view = new ModelAndView("product/form");
+        List<Category> categories = categoryRepository.findAll();
+        view.addObject("categories", categories);
+        view.addObject("product", new Product());
+        return view;
     }
+    
+    @PostMapping("/save")
+    public ModelAndView save(@ModelAttribute Product product, BindingResult result) {
+        if (!result.hasErrors()) {
+            product.setSlug(SlugUtils.toSlug(product.getName()));
+            productRepository.save(product);
+        }
+        return new ModelAndView("redirect:/product");
+    }
+    
+    @GetMapping("/edit/{id}")
+    public ModelAndView edit(@PathVariable Long id) {
+        ModelAndView view = new ModelAndView("product/form");
+        Product product = productRepository.findById(id).orElse(null);
+        List<Category> categories = categoryRepository.findAll();
+        view.addObject("categories", categories);
+        view.addObject("product", product);
+        return view;
+    }
+    
+    @GetMapping("/deleteForm/{id}")
+    public ModelAndView deleteForm(@PathVariable("id") Long id) {
+        ModelAndView view = new ModelAndView("product/deleteForm");
+        Product product = productRepository.findById(id).orElse(null);
+        view.addObject("product", product);
+        return view;
+    }
+    
+    @GetMapping("/delete/{id}")
+    public ModelAndView deleteProduct(@PathVariable("id") Long id) {
+        productRepository.deleteById(id);
+        return new ModelAndView("redirect:/product");
+    }
+    
 }

@@ -38,7 +38,7 @@ public class VariantServiceImpl implements VariantService {
 
     @Override
     public List<Variant> getVariants() {
-        return variantRepository.findByProductCategoryIsDeletedFalse();
+        return variantRepository.findAll();
     }
 
     @Override

@@ -58,11 +58,11 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<Product> getProducts() {
-        return productRepository.findByCategoryIsDeletedFalse();
+        return productRepository.findAll();
     }
 
     public List<Product> getProductsByCategoryId(Long categoryId) {
-        return productRepository.findByCategoryIdAndCategoryIsDeletedFalse(categoryId);
+        return productRepository.findByCategoryId(categoryId);
     }
 
 }
