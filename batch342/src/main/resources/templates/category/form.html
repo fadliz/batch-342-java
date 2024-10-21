@@ -17,10 +17,6 @@
         <label class="form-label" for="createdBy">Created by</label>
         <input type="text" id="createdBy" name="createdBy" class="form-control" th:field="*{createdBy}"/>
     </div>
-    <div class="form-outline mb-4">
-        <label class="form-label" for="isDeleted">Is Deleted</label>
-        <input type="checkbox" id="isDeleted" name="deleted" class="form-check-input" th:value="*{isDeleted}"/>
-    </div>
     <input type="hidden" id="categoryId" name="id" autocomplete="off" th:field="*{id}"/>
     <input type="hidden" id="createdAt" name="createdAt" autocomplete="off" th:field="*{createdAt}"/>
 </form>

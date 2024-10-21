@@ -29,13 +29,14 @@
                         <td th:text="${category.name}"></td>
                         <td th:text="${category.createdBy}"></td>
                         <td th:if="${category.isDeleted}">Yes</td>
-                        <td th:unless="${category.isDeleted}">No<td>
-                            <button type="button" class="btn btn-warning" th:onclick="editForm([[${category.id}]])">
-                                Edit
-                            </button>
-                            <button type="button" class="btn btn-danger" th:onclick="deleteForm([[${category.id}]])">
-                                Delete
-                            </button>
+                        <td th:unless="${category.isDeleted}">No</td>
+                        <td>
+                        <button type="button" class="btn btn-warning" th:onclick="editForm([[${category.id}]])">
+                            Edit
+                        </button>
+                        <button type="button" class="btn btn-danger" th:onclick="deleteForm([[${category.id}]])">
+                            Delete
+                        </button>
                         </td>
                     </tr>
                 </tbody>

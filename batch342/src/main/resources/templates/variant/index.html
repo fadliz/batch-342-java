@@ -7,7 +7,7 @@
         <div class="container mt-3">
             <h1 th:text="${title}"></h1>
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary mt-1 mb-3" onclick="openModal('add')">
+            <button type="button" class="btn btn-primary mt-1 mb-3" onclick="openForm()">
                 Add Variant Data
             </button>
 
@@ -22,6 +22,7 @@
                         <th scope="col">Price</th>
                         <th scope="col">Stock</th>
                         <th scope="col">Created By</th>
+                        <th scope="col">Is Deleted</th>
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
@@ -35,11 +36,13 @@
                         <td th:text="${variant.price}"></td>
                         <td th:text="${variant.stock}"></td>
                         <td th:text="${variant.createdBy}"></td>
+                        <td th:if="${variant.isDeleted}">Yes</td>
+                        <td th:unless="${variant.isDeleted}">No</td>
                         <td>
-                            <button type="button" class="btn btn-warning" th:onclick="openModal('edit', [[${variant.id}]])">
+                            <button id="variantEditBtn" type="button" class="btn btn-warning" th:onclick="editForm([[${variant.id}]])">
                                 Edit
                             </button>
-                            <button type="button" class="btn btn-danger" th:onclick="openModal('delete', [[${variant.id}]])">
+                            <button type="button" class="btn btn-danger" th:onclick="deleteForm([[${variant.id}]])">
                                 Delete
                             </button>
                         </td>
@@ -57,42 +60,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form id="variantForm">
-                            <div class="form-outline mb-4">
-                                <label class="form-label" for="categoryId">Category</label>
-                                <select class="form-select" name="categoryId" id="categoryId">
-                                    <option value="" selected disabled hidden>Choose here</option>
-                                    <option th:each="i : ${category}" th:value="${i.id}" th:text="${i.name}"></option>
-                                </select>
-                            </div>
-                            <div class="form-outline mb-4">
-                                <label class="form-label" for="productId">Product</label>
-                                <select class="form-select" name="productId" id="productId">
-                                    <option value="" selected disabled hidden>Choose here</option>
-                                </select>
-                            </div>
-                            <div class="form-outline mb-4">
-                                <label class="form-label" for="name">Name</label>
-                                <input type="text" id="name" name="name" class="form-control" autocomplete="off"/>
-                            </div>
-                            <div class="form-outline mb-4">
-                                <label class="form-label" for="description">Description</label>
-                                <input type="text" id="description" name="description" class="form-control" autocomplete="off"/>
-                            </div>
-                            <div class="form-outline mb-4">
-                                <label class="form-label" for="price">Price</label>
-                                <input type="number" id="price" name="price" class="form-control"/>
-                            </div>
-                            <div class="form-outline mb-4">
-                                <label class="form-label" for="stock">Stock</label>
-                                <input type="number" id="stock" name="stock" class="form-control"/>
-                            </div>
-                            <div class="form-outline mb-4">
-                                <label class="form-label" for="createdBy">Created by</label>
-                                <input type="text" id="createdBy" name="createdBy" class="form-control" />
-                            </div>
-                            <input type="hidden" id="variantId" name="id" autocomplete="off"/>
-                        </form>
+                        
                         <p id="modalParagraph"></p>
                     </div>
                     <div class="modal-footer">
