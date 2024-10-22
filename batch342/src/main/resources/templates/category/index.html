@@ -13,7 +13,7 @@
 
             <table class="table table-bordered table-striped table-hover table-sm">
                 <thead>
-                    <tr>
+                    <tr class="align-middle">
                         <th scope="col">#</th>
                         <th scope="col">Slug</th>
                         <th scope="col">Name</th>
@@ -23,14 +23,16 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr th:each="category, iter : ${categories}">
+                    <tr class="align-middle" th:each="category, iter : ${categories}">
                         <th scope="row" th:text="${iter.count}"></th>
                         <td th:text="${category.slug}"></td>
                         <td th:text="${category.name}"></td>
                         <td th:text="${category.createdBy}"></td>
-                        <td th:if="${category.isDeleted}">Yes</td>
-                        <td th:unless="${category.isDeleted}">No</td>
-                        <td>
+                        <td class="text-center">
+                            <input disabled type="checkbox" class="form-check-input" style="border: 1px solid #000;"
+                                id="isDeleted" name="deleted" autocomplete="off" th:checked="*{category.isDeleted}" />
+                        </td>
+                        <td >
                         <button type="button" class="btn btn-warning" th:onclick="editForm([[${category.id}]])">
                             Edit
                         </button>

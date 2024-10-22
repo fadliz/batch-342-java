@@ -1,5 +1,10 @@
 document.getElementById("saveButton").addEventListener("click", function () {
-  document.getElementById("variantForm").submit();
+  const form = document.getElementById("variantForm");
+  if (form.checkValidity()) {
+    form.submit();
+} else {
+    form.reportValidity();
+}
 });
 
 document.getElementById("deleteButton").addEventListener("click", function () {

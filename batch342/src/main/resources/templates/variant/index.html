@@ -13,7 +13,7 @@
 
             <table class="table table-bordered table-striped table-hover table-sm">
                 <thead>
-                    <tr>
+                    <tr class="align-middle">
                         <th scope="col">#</th>
                         <th scope="col">Slug</th>
                         <th scope="col">Name</th>
@@ -27,7 +27,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr th:each="variant, iter : ${variants}">
+                    <tr class="align-middle" th:each="variant, iter : ${variants}">
                         <th scope="row" th:text="${iter.count}"></th>
                         <td th:text="${variant.slug}"></td>
                         <td th:text="${variant.name}"></td>
@@ -36,8 +36,10 @@
                         <td th:text="${variant.price}"></td>
                         <td th:text="${variant.stock}"></td>
                         <td th:text="${variant.createdBy}"></td>
-                        <td th:if="${variant.isDeleted}">Yes</td>
-                        <td th:unless="${variant.isDeleted}">No</td>
+                        <td class="text-center">
+                            <input disabled type="checkbox" class="form-check-input" style="border: 1px solid #000;"
+                                id="isDeleted" name="deleted" autocomplete="off" th:checked="${variant.isDeleted}" />
+                        </td>
                         <td>
                             <button id="variantEditBtn" type="button" class="btn btn-warning" th:onclick="editForm([[${variant.id}]])">
                                 Edit

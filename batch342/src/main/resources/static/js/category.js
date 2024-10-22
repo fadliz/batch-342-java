@@ -1,5 +1,10 @@
 document.getElementById("saveButton").addEventListener("click", function () {
-  document.getElementById("categoryForm").submit();
+  const form = document.getElementById("categoryForm");
+  if (form.checkValidity()) {
+    form.submit();
+} else {
+    form.reportValidity();
+}
 });
 document.getElementById("deleteButton").addEventListener("click", function () {
   const categoryId = document.getElementById("deleteCategoryId").value; // Get the category ID
