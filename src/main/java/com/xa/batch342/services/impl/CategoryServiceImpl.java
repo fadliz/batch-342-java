@@ -26,6 +26,11 @@ public class CategoryServiceImpl implements CategoryService{
 
     @Override
     public Category updateCategory(Long id, Category category) {
+        // JPA finds the entity by its ID
+        // returns Optional util class
+        // because entity by ID might not exists
+        // Optional is a class with <T> as attribute
+        // <T> can be empty/null, isPresent checks the <T> for it
         Optional<Category> existingCategoryOpt = categoryRepository.findById(id);
         if (existingCategoryOpt.isPresent()) {
             Category existingCategory = existingCategoryOpt.get();
@@ -52,6 +57,17 @@ public class CategoryServiceImpl implements CategoryService{
         return categoryRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Category not found"));
     }
+
+    public boolean isSlugUnique(String slug, Long id) {
+        Optional<Category> existingCategoryOpt = categoryRepository.getCategoryBySlug(slug);
+        if (existingCategoryOpt.isPresent()) {
+            Category existingCategory = existingCategoryOpt.get();
+            return existingCategory.getId().equals(id);
+        } 
+        // If no category with the same slug exists, or it's the same entity being updated
+        return !existingCategoryOpt.isPresent();
+    }
+    
 
     @Override
     public List<Category> getCategories() {

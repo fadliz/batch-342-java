@@ -38,11 +38,16 @@ public class VariantServiceImpl implements VariantService {
 
     @Override
     public List<Variant> getVariants() {
-        return variantRepository.findByProductCategoryIsDeletedFalse();
+        return variantRepository.findAll();
     }
 
     @Override
     public Variant updateVariant(Long id, Variant variant) {
+        // JPA finds the entity by its ID
+        // returns Optional util class
+        // because entity by ID might not exists
+        // Optional is a class with <T> as attribute
+        // <T> can be empty/null, isPresent checks the <T> for it
         Optional<Variant> existingVariantOpt = variantRepository.findById(id);
         if (existingVariantOpt.isPresent()) {
             Variant existingVariant = existingVariantOpt.get();

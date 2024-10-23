@@ -27,6 +27,11 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product updateProduct(Long id, Product product) {
+        // JPA finds the entity by its ID
+        // returns Optional util class
+        // because entity by ID might not exists
+        // Optional is a class with <T> as attribute
+        // <T> can be empty/null, isPresent checks the <T> for it
         Optional<Product> existingProductOpt = productRepository.findById(id);
         if (existingProductOpt.isPresent()) {
             Product existingProduct = existingProductOpt.get();
@@ -53,16 +58,15 @@ public class ProductServiceImpl implements ProductService {
     public Product getProduct(Long id) {
         return productRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Product not found"));
-
     }
 
     @Override
     public List<Product> getProducts() {
-        return productRepository.findByCategoryIsDeletedFalse();
+        return productRepository.findAll();
     }
 
-    public List<Product> getProductsByCategoryId(Long categoryId) {
-        return productRepository.findByCategoryIdAndCategoryIsDeletedFalse(categoryId);
+    public List<Product> getAvailableProductsByCategoryId(Long categoryId) {
+        return productRepository.getAvailableProductsByCategoryId(categoryId);
     }
 
 }
