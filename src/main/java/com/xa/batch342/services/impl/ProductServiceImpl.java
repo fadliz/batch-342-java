@@ -41,7 +41,7 @@ public class ProductServiceImpl implements ProductService {
             } else {
                 existingProduct.setSlug(SlugUtils.toSlug(product.getName()));
             }
-            existingProduct.setModifiedBy(product.getModifiedBy());
+            existingProduct.setCreatedBy(product.getCreatedBy());
             existingProduct.setCategoryId(product.getCategoryId());
             return productRepository.save(existingProduct);
         } else {

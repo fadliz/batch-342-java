@@ -27,7 +27,7 @@ import com.xa.batch342.utils.SlugUtils;
 
 @RestController
 @RequestMapping("/api/category")
-@CrossOrigin("http://localhost:9002")
+@CrossOrigin("*")
 public class CategoryRestController {
 
     @Autowired
@@ -77,6 +77,27 @@ public class CategoryRestController {
         }
     }
 
+    @GetMapping("/slug={slug}")
+    public ResponseEntity<?> getCategoryById(@PathVariable String slug) {
+        LinkedHashMap<String, Object> resultMap = new LinkedHashMap<>();
+        ModelMapper modelMapper = new ModelMapper();
+        modelMapper.getConfiguration()
+                .setMatchingStrategy(MatchingStrategies.STRICT);
+        try {
+            Category category = categoryService.getCategoryBySlug(slug);
+            CategoryResponseDto categoryResponseDto = modelMapper.map(category, CategoryResponseDto.class);
+            resultMap.put("status", 200);
+            resultMap.put("message", "success");
+            resultMap.put("data", categoryResponseDto);
+            return new ResponseEntity<>(resultMap, HttpStatus.OK);
+        } catch (Exception e) {
+            resultMap.put("status", 500);
+            resultMap.put("message", "success");
+            resultMap.put("error", e);
+            return new ResponseEntity<>(resultMap, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<?> updateCategory(@PathVariable Long id,
             @RequestBody CategoryRequestDto categoryRequestDto) {
@@ -90,6 +111,32 @@ public class CategoryRestController {
         try {
             Category category = modelMapper.map(categoryRequestDto, Category.class);
             Category updatedCategory = categoryService.updateCategory(id, category);
+            CategoryResponseDto categoryResponseDto = modelMapper.map(updatedCategory, CategoryResponseDto.class);
+            resultMap.put("status", 200);
+            resultMap.put("message", "success");
+            resultMap.put("data", categoryResponseDto);
+            return new ResponseEntity<>(resultMap, HttpStatus.OK);
+        } catch (Exception e) {
+            resultMap.put("status", 500);
+            resultMap.put("message", "success");
+            resultMap.put("error", e);
+            return new ResponseEntity<>(resultMap, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PutMapping("/slug={slug}")
+    public ResponseEntity<?> updateCategoryBySlug(@PathVariable String slug,
+            @RequestBody CategoryRequestDto categoryRequestDto) {
+        LinkedHashMap<String, Object> resultMap = new LinkedHashMap<>();
+        ModelMapper modelMapper = new ModelMapper();
+        modelMapper.getConfiguration()
+                .setMatchingStrategy(MatchingStrategies.STRICT);
+        if (categoryRequestDto.getSlug() == null) {
+            categoryRequestDto.setSlug(SlugUtils.toSlug(categoryRequestDto.getName()));
+        }
+        try {
+            Category category = modelMapper.map(categoryRequestDto, Category.class);
+            Category updatedCategory = categoryService.updateCategoryBySlug(slug, category);
             CategoryResponseDto categoryResponseDto = modelMapper.map(updatedCategory, CategoryResponseDto.class);
             resultMap.put("status", 200);
             resultMap.put("message", "success");

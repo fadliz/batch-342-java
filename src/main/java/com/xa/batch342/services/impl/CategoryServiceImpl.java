@@ -40,7 +40,25 @@ public class CategoryServiceImpl implements CategoryService{
                 existingCategory.setSlug(SlugUtils.toSlug(category.getName()));
             }
             existingCategory.setName(category.getName());
-            existingCategory.setModifiedBy(category.getModifiedBy());
+            existingCategory.setCreatedBy(category.getCreatedBy());
+            return categoryRepository.save(existingCategory);
+        } else {
+            throw new RuntimeException("Category not found");
+        }
+    }
+
+    public Category updateCategoryBySlug(String slug, Category category) {
+        Optional<Category> existingCategoryOpt = categoryRepository.getCategoryBySlug(slug);
+        if (existingCategoryOpt.isPresent()) {
+            Category existingCategory = existingCategoryOpt.get();
+            if (category.getSlug() != null) {
+                existingCategory.setSlug(category.getSlug());
+            } else {
+                existingCategory.setSlug(SlugUtils.toSlug(category.getName()));
+            }
+            existingCategory.setName(category.getName());
+            existingCategory.setCreatedBy(category.getCreatedBy());
+            existingCategory.setDeleted(category.isDeleted());
             return categoryRepository.save(existingCategory);
         } else {
             throw new RuntimeException("Category not found");
@@ -58,6 +76,13 @@ public class CategoryServiceImpl implements CategoryService{
                 .orElseThrow(() -> new RuntimeException("Category not found"));
     }
 
+    public Category getCategoryBySlug(String slug) {
+        return categoryRepository.getCategoryBySlug(slug)
+                .orElseThrow(() -> new RuntimeException("Category not found"));
+    }
+
+    // FIXME: unused because update by slug doesn't pass id
+    // could be used for update by id
     public boolean isSlugUnique(String slug, Long id) {
         Optional<Category> existingCategoryOpt = categoryRepository.getCategoryBySlug(slug);
         if (existingCategoryOpt.isPresent()) {
@@ -67,7 +92,6 @@ public class CategoryServiceImpl implements CategoryService{
         // If no category with the same slug exists, or it's the same entity being updated
         return !existingCategoryOpt.isPresent();
     }
-    
 
     @Override
     public List<Category> getCategories() {

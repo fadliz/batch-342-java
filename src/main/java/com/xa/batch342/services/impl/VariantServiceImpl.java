@@ -60,7 +60,7 @@ public class VariantServiceImpl implements VariantService {
             existingVariant.setDescription(variant.getDescription());
             existingVariant.setPrice(variant.getPrice());
             existingVariant.setStock(variant.getStock());
-            existingVariant.setModifiedBy(variant.getModifiedBy());
+            existingVariant.setCreatedBy(variant.getCreatedBy());
             existingVariant.setProductId(variant.getProductId());
             return variantRepository.save(existingVariant);
         } else {
