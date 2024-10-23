@@ -3,7 +3,6 @@ package com.xa.batch342.entities;
 import java.math.BigDecimal;
 
 import org.hibernate.annotations.SQLDelete;
-import org.hibernate.annotations.SQLRestriction;
 
 import com.xa.batch342.utils.SlugUtils;
 
@@ -25,7 +24,6 @@ import lombok.EqualsAndHashCode;
 @Data
 @Table(name = "variants")
 @SQLDelete(sql = "UPDATE variants SET is_deleted = true, deleted_at = NOW() WHERE id = ?")
-@SQLRestriction("is_deleted = false")
 public class Variant extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

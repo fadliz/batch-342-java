@@ -1,7 +1,6 @@
 package com.xa.batch342.entities;
 
 import org.hibernate.annotations.SQLDelete;
-import org.hibernate.annotations.SQLRestriction;
 
 import com.xa.batch342.utils.SlugUtils;
 
@@ -19,7 +18,6 @@ import lombok.EqualsAndHashCode;
 @Data
 @Table(name = "categories")
 @SQLDelete(sql = "UPDATE categories SET is_deleted = true, deleted_at = NOW() WHERE id = ?")
-@SQLRestriction("is_deleted = false")
 public class Category extends BaseEntity {
 
     @Id
